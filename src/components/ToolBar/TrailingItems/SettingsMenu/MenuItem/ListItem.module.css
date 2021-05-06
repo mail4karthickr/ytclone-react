@@ -1,0 +1,42 @@
+.listItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  box-sizing: border-box;
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+.listItem:hover {
+  background-color: #f0f0f0;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.92rem;
+  color: #040404;
+}
+
+.leadingIcon {
+  width: 20px;
+  height: 25px;
+  filter: invert(54%) sepia(8%) saturate(17%) hue-rotate(356deg) brightness(96%)
+    contrast(86%);
+}
+
+.trailingIcon {
+  width: 20px;
+  height: 25px;
+  margin-left: 40px;
+  filter: invert(54%) sepia(8%) saturate(17%) hue-rotate(356deg) brightness(96%)
+    contrast(86%);
+}
+
+.leadingIconNull {
+  padding-left: 45px;
+}

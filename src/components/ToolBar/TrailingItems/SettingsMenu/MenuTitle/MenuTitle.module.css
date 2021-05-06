@@ -1,0 +1,12 @@
+.menuTitle {
+  display: flex;
+  flex-direction: row;
+  padding: 10px 15px;
+  gap: 15px;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}

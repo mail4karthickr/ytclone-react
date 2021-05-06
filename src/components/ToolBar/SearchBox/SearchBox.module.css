@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.searchBox {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #c5c5c5;
+  outline: none;
+}
+
+.searchInput {
+  width: 550px;
+  padding: 8px;
+  outline: none;
+  border: none;
+  border-right: 1px solid #c5c5c5;
+}
+
+.searchInput:focus {
+  border: 1px solid #1755ad;
+}
+
+.microphoneIcon {
+  color: rgb(85, 85, 85);
+  margin-left: 10px;
+  width: 20px;
+  height: 40px;
+  cursor: pointer;
+}

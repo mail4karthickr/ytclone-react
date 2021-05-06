@@ -1,0 +1,34 @@
+.tabItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 70px;
+  gap: 7px;
+  cursor: pointer;
+  background-color: #fff;
+  border: none;
+  font-size: 0.65rem;
+  color: rgb(85, 85, 85);
+}
+
+.tabItem:hover {
+  background-color: #f0f0f0;
+}
+
+.tabItemSelected {
+  color: #ff001e;
+}
+
+.tabIcon {
+  width: 23px;
+  height: 23px;
+  filter: invert(33%) sepia(23%) saturate(0%) hue-rotate(141deg) brightness(93%)
+    contrast(92%);
+}
+
+.tabIconSelected {
+  filter: invert(18%) sepia(93%) saturate(6590%) hue-rotate(347deg)
+    brightness(97%) contrast(118%);
+}

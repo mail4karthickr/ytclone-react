@@ -1,0 +1,10 @@
+.menu {
+  list-style: none;
+  padding-left: 0px;
+}
+
+.subHeading {
+  margin-top: 10px;
+  font-size: 0.75rem;
+  padding: 10px 10px;
+}

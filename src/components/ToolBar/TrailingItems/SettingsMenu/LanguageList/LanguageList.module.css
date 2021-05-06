@@ -1,0 +1,18 @@
+.menu {
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0px;
+}
+
+.divider {
+  padding: 20px 0px;
+}

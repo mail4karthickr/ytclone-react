@@ -1,0 +1,20 @@
+.menuItem1 {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 20px 30px;
+  box-sizing: border-box;
+  gap: 10px;
+  width: 100%;
+}
+
+.menuItem1:hover {
+  background-color: #f0f0f0;
+}
+
+.menuIcon {
+  width: 20px;
+  height: 25px;
+  filter: invert(54%) sepia(8%) saturate(17%) hue-rotate(356deg) brightness(96%)
+    contrast(86%);
+}
