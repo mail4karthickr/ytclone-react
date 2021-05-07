@@ -19,26 +19,26 @@ const DeviceTheme = (props) => {
             <MenuTitle title={'Appearance'} onBackClicked={props.onDeviceThemeBackClicked}/>
             <div className={commonClasses.divider}></div>
             <div className={`${commonClasses.menuSubHeadColor} ${classes.subHeading}`}>Setting applies to this browser only</div>
-            <MenuItem1
-                title="DeviceTheme"
-                key={themeType.DeviceTheme}
+             <ListItem
                 id={themeType.DeviceTheme}
-                itemClicked={ (theme) => props.themeChanged(theme)}
-                isSelected={props.currentTheme === themeType.DeviceTheme}
+                key={themeType.DeviceTheme}
+                leadingIcon={props.currentTheme === themeType.DeviceTheme ? tickIcon : null}
+                title={<div>DeviceTheme</div>}
+                onClick={ (theme) => props.themeChanged(theme)}
             />
-            <MenuItem1
-                title="DarkTheme" 
-                key={themeType.DarkTheme}
+             <ListItem
                 id={themeType.DarkTheme}
-                itemClicked={ (theme) => props.themeChanged(theme)}
-                isSelected={props.currentTheme === themeType.DarkTheme}
+                key={themeType.DarkTheme}
+                leadingIcon={props.currentTheme === themeType.DarkTheme ? tickIcon : null}
+                title={<div>DarkTheme</div>}
+                onClick={ (theme) => props.themeChanged(theme)}
             />
-             <MenuItem1
-                title="LightTheme" 
-                key={themeType.LightTheme}
+            <ListItem
                 id={themeType.LightTheme}
-                itemClicked={ (theme) => props.themeChanged(theme)}
-                isSelected={props.currentTheme === themeType.LightTheme}
+                key={themeType.LightTheme}
+                leadingIcon={props.currentTheme === themeType.LightTheme ? tickIcon : null}
+                title={<div>LightTheme</div>}
+                onClick={ (theme) => props.themeChanged(theme)}
             />
         </ul>
     );

@@ -11,8 +11,9 @@ import settingsIcon from '../assets/images/settingsIcon.svg';
 import yourDataIcon from '../assets/images/yourDataIcon.svg';
 import rightArrowIcon from '../assets/images/rightArrowIcon.svg';
 import ListItem from '../MenuItem/ListItem';
+import Aux from 'shared/hoc/Aux';
 
-const MenuItemType = Object.freeze({
+export const MenuItemType = Object.freeze({
     DeviceTheme: 'DeviceTheme',
     Language: 'Language',
     Location: 'Location',
@@ -29,7 +30,7 @@ const RootMenu = (props) => {
         {
             name: MenuItemType.DeviceTheme,
             leadingIcon: deviceThemeIcon, 
-            title: <div>{`Appearance: ${props.currentTheme}`}</div>, 
+            title: <div className={classes.title}>{`Appearance: ${props.currentTheme}`}</div>, 
             trailingIcon: rightArrowIcon,
             onClick: props.showDeviceTheme
         },
@@ -43,7 +44,7 @@ const RootMenu = (props) => {
         {
             name: MenuItemType.Location,
             leadingIcon: locationIcon,
-            title: <div>{`Location: ${props.currentLocation}`}</div>, 
+            title: <div>{`Location: ${props.currentLocation.name}`}</div>, 
             trailingIcon: rightArrowIcon,
             onClick: props.showLocationSettings
         },
@@ -86,19 +87,20 @@ const RootMenu = (props) => {
             divider = <div key="divider" className={`${commonClasses.divider} ${classes.divder}`}></div>
         }
         return (
-            <div>
-                <ListItem 
+            <Aux>
+                <ListItem
+                    id={item.name}
                     key={item.name}
                     leadingIcon={item.leadingIcon}
                     trailingIcon={item.trailingIcon}
                     title={item.title}
-                    onClick={item.onClick}
+                    onClick={ (id) => props.onClick(id) }
                 />
                 {divider}
-            </div>
+            </Aux>
         )
     });
-    return <ul>{listItems}</ul>
+    return <ul className={classes.menu}>{listItems}</ul>
 };
 
 export default RootMenu;

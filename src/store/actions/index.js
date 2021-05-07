@@ -1,5 +1,6 @@
 export {
     fetchLanguagesAndRegions,
     changeLanguage,
-    updateTheme
+    updateTheme,
+    updateLocation
 } from './userSettings';

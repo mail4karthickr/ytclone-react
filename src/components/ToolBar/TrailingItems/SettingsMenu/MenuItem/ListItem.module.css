@@ -4,9 +4,9 @@
   align-items: center;
   justify-content: space-between;
   background-color: #fff;
-  box-sizing: border-box;
   padding: 8px 15px;
   cursor: pointer;
+  width: 90%;
 }
 
 .listItem:hover {
@@ -39,4 +39,9 @@
 
 .leadingIconNull {
   padding-left: 45px;
+}
+
+.imageContainer {
+  width: 25px;
+  height: 25px;
 }

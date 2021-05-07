@@ -16,9 +16,11 @@ const ListItem = (props) => {
     //     attachedClasses = `${classes.menuItem} ${classes.leadingIconNull}`
     // }
     return(
-        <div className={`${classes.listItem}`} onClick={props.onClick}>
+        <div className={`${classes.listItem}`} onClick={() => props.onClick(props.id)}>
             <div className={classes.flex}>
-                {leadingIcon}
+                <div className={classes.imageContainer}>
+                    {leadingIcon}
+                </div>
                 {React.cloneElement(props.title)}
             </div>
             {trailingIcon}

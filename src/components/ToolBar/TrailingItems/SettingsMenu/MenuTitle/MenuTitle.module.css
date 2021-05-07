@@ -3,6 +3,7 @@
   flex-direction: row;
   padding: 10px 15px;
   gap: 15px;
+  color: black;
 }
 
 .icon {

@@ -6,8 +6,9 @@ const initialState = {
     loading: false,
     error: null,
     languages: null,
-    regions: null,
+    locations: null,
     currentLanguage: {hl: 'en', name: 'english'},
+    currentLocation:  {gl: 'GB', name: 'United Kingdom'},
     theme: themeType.LightTheme
 };
 
@@ -27,7 +28,7 @@ const fetchLanguagesSuccess = (state, action) => {
             loading: false, 
             error: null,
             languages: action.languages,
-            regions: action.regions
+            locations: action.locations
     });
 }
 
@@ -35,6 +36,13 @@ const changeLanguage = (state, action) => {
     console.log('changeLanguage1', action.language)
     return updateObject(state, {
         currentLanguage: action.language
+    });
+}
+
+const updateLocation = (state, action) => {
+    console.log('updateLocation', action.location)
+    return updateObject(state, {
+        currentLocation: action.location
     });
 }
 
@@ -51,6 +59,7 @@ const reducer = ( state = initialState, action ) => {
         case actionTypes.FETCH_LANGUAGES_AND_REGIONS_FAILED: return fetchLanguagesError(state, action);
         case actionTypes.CHANGE_LANGUAGE: return changeLanguage(state, action);
         case actionTypes.UPDATE_THEME: return updateTheme(state, action);
+        case actionTypes.UPDATE_LOCATION: return updateLocation(state, action);
         default: return state
     }
     return state

@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import MenuItem1 from '../MenuItem/MenuItem1';
 import MenuTitle from '../MenuTitle/MenuTitle';
-import classes from './LanguageList.module.css';
+import classes from './List.module.css';
 import commonClasses from '../../../../../shared/styles/styles.module.css';
 import { updateObject } from 'shared/utility';
+import ListItem from '../MenuItem/ListItem';
+import tickIcon from '../assets/images/tickIcon.svg';
 
 const LanguageList = (props) => {
-    console.log('LanguageList', props.currentLanguage);
     let languages = props.languages.map((language) => {
-        const isSelected = language.hl === props.currentLanguage
-        console.log('LanguageList language', language);
-        return <MenuItem1 
-                    title={language.name} 
+        const isSelected = language.hl === props.currentLanguage.hl
+        return <ListItem 
+                    id={language}
                     key={language.hl}
-                    id={language.hl}
-                    itemClicked={ () => props.languageChanged(language)}
-                    isSelected={isSelected}
+                    leadingIcon={isSelected ? tickIcon : null}
+                    title={<div>{`${language.name}`}</div>}
+                    onClick={ (language) => props.languageChanged(language)}
                 />
     });
     return (

@@ -7,33 +7,6 @@
   margin-top: -15px;
   margin-right: 150px;
   list-style: none;
-  width: 300px;
+  width: 310px;
+  padding: 10px 0px 6px;
 }
-
-/* .menuTitle {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.92rem;
-  color: #040404;
-}
-
-.icon {
-  width: 20px;
-  height: 25px;
-  filter: invert(54%) sepia(8%) saturate(17%) hue-rotate(356deg) brightness(96%)
-    contrast(86%);
-}
-
-.arrowIcon {
-  width: 20px;
-  height: 25px;
-  margin-left: 40px;
-  filter: invert(54%) sepia(8%) saturate(17%) hue-rotate(356deg) brightness(96%)
-    contrast(86%);
-}
-
-.divider {
-  padding-bottom: 7px;
-} */

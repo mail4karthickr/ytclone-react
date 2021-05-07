@@ -5,9 +5,11 @@ import * as actions from '../../../../store/actions';
 import { connect } from 'react-redux';
 import Spinner from './Spinner/SettingsMenuLoader';
 import classes from './SettingsMenu.module.css';
-import LanguageList from './LanguageList/LanguageList';
+import LanguageList from './List/LanguageList';
 import { updateObject } from 'shared/utility';
 import { themeType } from './DeviceTheme/DeviceTheme'
+import { MenuItemType } from './RootMenu/RootMenu';
+import LocationList from './List/LocationList';
 
 const MenuType = Object.freeze({
     RootMenu: 'RootMenu',
@@ -30,13 +32,6 @@ class SettingsMenu extends Component {
         this.props.fetchLanguages();
     }
 
-    showDeviceThemeHandler = () => {
-        this.setState({
-            ...this.state,
-            menu: MenuType.DeviceTheme
-        })
-    }
-
     onDeviceThemeBackClickedHandler = () => {
         this.setState({
             ...this.state,
@@ -50,27 +45,38 @@ class SettingsMenu extends Component {
         this.props.closeSettingsMenu();
     }
 
-    showLanguageSettingsHandler = () => {
-        this.setState({menu: MenuType.Language});
-    }
-
     languageListBackClickedHandler = () => {
         console.log("languageListBackClickedHandler");
         this.setState({menu: MenuType.RootMenu});
-    }
-
-    showLocationSettingsHandler = () => {
-        console.log('showLocationSettingsHandler')
-    }
-
-    showRestrictedModeHandler = () => {
-        console.log('showRestrictedModeHandler')
     }
 
     languageChangedHandler = (language) => {
         console.log('languageChangedHandler', language);
         this.props.changeLanguage(language);
         this.props.closeSettingsMenu();
+    }
+
+    locationChangedHandler = (location) => {
+        console.log('locationChangedHandler', location);
+        this.props.updateLocation(location);
+        this.props.closeSettingsMenu();
+    }
+
+    rootMenuListItemTappedHandler = (itemType) => {
+        switch (itemType) {
+            case MenuItemType.DeviceTheme:
+                this.setState({...this.state, menu: MenuType.DeviceTheme})
+                break;
+            case MenuItemType.Language:
+                this.setState({...this.state, menu: MenuType.Language})
+                break;
+            case MenuItemType.Location:
+                this.setState({...this.state, menu: MenuType.Location})
+                break;
+            case MenuItemType.RestrictedMode:
+                this.setState({...this.state, menu: MenuType.RestrcitedMode})
+                break;
+        }
     }
 
     render() {
@@ -85,13 +91,11 @@ class SettingsMenu extends Component {
         switch (this.state.menu) {
             case MenuType.RootMenu:
                 menu = <RootMenu
-                    showDeviceTheme={this.showDeviceThemeHandler}
-                    showLanguageSettings={this.showLanguageSettingsHandler}
-                    showLocationSettings={this.showLocationSettingsHandler}
-                    showRestrictedMode={this.showRestrictedModeHandler}
-                    currentLanguage={this.props.currentLanguage}
-                    currentTheme={this.props.currentTheme}
-                />
+                            currentLanguage={this.props.currentLanguage}
+                            currentLocation={this.props.currentLocation}
+                            currentTheme={this.props.currentTheme}
+                            onClick={(id) => this.rootMenuListItemTappedHandler(id)}
+                        />
                 break;
             case MenuType.DeviceTheme:
                 menu = <DeviceTheme 
@@ -108,11 +112,19 @@ class SettingsMenu extends Component {
                             languageChanged={(lang) => this.languageChangedHandler(lang)}
                         />
                 break;
+                case MenuType.Location:
+                    menu = <LocationList 
+                                locations={this.props.locations}
+                                locationListBackClicked={this.languageListBackClickedHandler}
+                                currentLocation={this.props.currentLocation}
+                                locationChanged={(location) => this.locationChangedHandler(location)}
+                            />
+                    break;
             default:
                 menu = null;
                 break;
         }
-        return <div className={classes.menu}>{menu}</div>;
+        return <ul className={classes.menu}>{menu}</ul>;
     }
 }
 
@@ -121,9 +133,10 @@ const mapStateToProps = state => {
         loading: state.userSettings.loading,
         error: state.userSettings.error,
         languages: state.userSettings.languages,
-        regions: state.userSettings.regions,
+        locations: state.userSettings.locations,
         currentLanguage: state.userSettings.currentLanguage,
-        currentTheme: state.userSettings.theme
+        currentTheme: state.userSettings.theme,
+        currentLocation: state.userSettings.currentLocation
     };
 }
 
@@ -131,7 +144,8 @@ const mapDispatchToProps = dispatch => {
     return {
         fetchLanguages: () => dispatch(actions.fetchLanguagesAndRegions()),
         changeLanguage: (language) => dispatch(actions.changeLanguage(language)),
-        updateTheme: (theme) => dispatch(actions.updateTheme(theme))
+        updateTheme: (theme) => dispatch(actions.updateTheme(theme)),
+        updateLocation: (location) => dispatch(actions.updateLocation(location))
     }
 }
 
