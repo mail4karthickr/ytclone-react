@@ -1,0 +1,33 @@
+@import "../../../../../Shared/Styles/colors.module.css";
+
+.tabItemTitle {
+  margin-left: 0px;
+  color: blue;
+  background-color: brown;
+}
+
+.tabItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.tabItem:hover {
+  background-color: var(--hoverColor);
+}
+
+.tabItemIcon {
+  width: 25px;
+  height: 25px;
+  filter: invert(33%) sepia(23%) saturate(0%) hue-rotate(141deg) brightness(93%)
+    contrast(92%);
+  border-radius: 50%;
+}
+
+.tabItemText {
+  margin-left: 20px;
+  font-size: 0.9rem;
+  color: var(--textColor);
+}
