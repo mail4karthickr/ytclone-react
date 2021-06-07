@@ -1,4 +1,4 @@
-import { updateObject } from '../../../Shared/utility'
+import { updateObject } from '../../../Shared/Utility'
 import { themeType } from '../DeviceTheme/DeviceTheme';
 import * as ActionTypes from './ActionTypes';
 

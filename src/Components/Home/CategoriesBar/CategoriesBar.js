@@ -1,6 +1,6 @@
 import Divider from 'Shared/Components/UI/Divider/Divider';
 import React, { Component } from 'react';
-import { updateObject } from 'Shared/utility';
+import { updateObject } from 'Shared/Utility';
 import classes from './CategoriesBar.module.css';
 import Chips from './Chips/Chips';
 

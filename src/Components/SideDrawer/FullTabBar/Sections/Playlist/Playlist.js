@@ -7,7 +7,7 @@ import LikedVideosIcon from '../../../assets/likeIcon.svg';
 import ShowMoreIcon from '../../../assets/showMoreIcon.svg';
 import ShowFewerItemsIcon from '../../../assets/showFewerIcon.svg';
 import TabItem from '../TabItem/TabItem';
-import { updateObject } from 'Shared/utility';
+import { updateObject } from 'Shared/Utility';
 
 class Playlist extends Component {
     state = {

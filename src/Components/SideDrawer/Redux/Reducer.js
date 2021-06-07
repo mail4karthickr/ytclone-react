@@ -1,5 +1,5 @@
 import * as ActionTypes from './ActionTypes';
-const { updateObject } = require("Shared/utility");
+const { updateObject } = require("Shared/Utility");
 
 const initialState = {
     fetchSubscriptionsStart: false,
