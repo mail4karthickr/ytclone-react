@@ -2,31 +2,26 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
-import userSettingsReducer from './store/reducers/userSettings';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import Home from 'screens/Home/Home';
-
-const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
-
-const rootReducer = combineReducers({
-    userSettings: userSettingsReducer
-})
-
-const store = createStore(rootReducer, composeEnhancers(
-  applyMiddleware(thunk)
-));
+import Root from './Root/Root';
+import { store } from './store'
+import { ThemeProvider } from 'styled-components';
+import { LightTheme } from './Shared/Theme';
 
 const app = (
-  <Provider store={store}>
-    <React.StrictMode>
-      <BrowserRouter>
-        <Home />
-      </BrowserRouter>
-    </React.StrictMode>
+  <ThemeProvider theme={LightTheme}>
+    <Provider store={store}>
+      <React.StrictMode>
+        <BrowserRouter>
+          <Switch>
+            <Route path="/" component={Root} />
+          </Switch>
+        </BrowserRouter>
+      </React.StrictMode>
   </Provider>
+  </ThemeProvider>
 );
 
 ReactDOM.render( app, document.getElementById( 'root' ) );

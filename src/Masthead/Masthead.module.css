@@ -1,0 +1,40 @@
+.toolbar {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  padding: 0px 25px;
+}
+
+.divider {
+  border-top: 1px solid #d9d9d9;
+  margin-left: 75px;
+}
+
+.seaContainer {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  padding-right: 15px;
+  align-items: center;
+  gap: 15px;
+}
+
+.searchIcon {
+  width: 25px;
+  height: 50px;
+}
+
+.microphoneIcon {
+  width: 25px;
+  height: 50px;
+}
+
+.backArrowIcon {
+  width: 25px;
+  height: 50px;
+}
+
+.searchBoxContainer {
+  display: flex;
+  padding: 0px 20px;
+}

@@ -1,0 +1,44 @@
+.main {
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  grid-template-columns: 0px 1fr;
+}
+
+/* .menuOpen {
+  grid-template-columns: 250px 1fr;
+}
+
+.menuClose {
+  grid-template-columns: 0px 1fr;
+} */
+
+.wrapper {
+  display: grid;
+  gap: 1px;
+  overflow: hidden;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.fullTabBar {
+  grid-template-columns: 250px 1fr;
+}
+
+.tabItems {
+  grid-template-columns: 70px 1fr;
+}
+
+/* @media (min-width: 800px) {
+  .main {
+    grid-template-columns: 70px 1fr;
+  }
+}
+
+@media (min-width: 1300px) {
+  .main {
+    grid-template-columns: 250px 1fr;
+  }
+} */

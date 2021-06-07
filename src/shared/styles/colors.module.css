@@ -2,4 +2,19 @@
   --dividercolor: #e1e1e1;
   --hoverColor: #f0f0f0;
   --menuTitleColor: #040404;
+  --primaryColor: #ffffff;
+  --secondaryColor: #f8f8f8;
+  --titleTextColor: #040404;
+  --controlsBgColor: #f2f2f2;
+  --catElementSelColor: #555555;
+  --catElementSelTextColor: #ffffff;
+  --borderColor: #cecece;
+  --accentColor: #555555;
+  --textColor: #0c0c0c;
+  --yt-spec-static-brand-red: #f00;
+  --iconColor: #555555;
+  --iconHighligtedColor: #f00;
+  --homeBgColor: rgb(248, 248, 248);
+  --chipsBgColor: rgb(242, 242, 242);
+  --chipsHoverColor: rgb(229, 229, 229);
 }

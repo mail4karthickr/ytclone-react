@@ -1,0 +1,46 @@
+.sectionItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 25px 10px 25px;
+  cursor: pointer;
+}
+
+.sectionItem:hover {
+  background-color: var(--hoverColor);
+}
+
+.channelLogo {
+  width: 20px;
+  height: 20px;
+}
+
+.title {
+  font-size: 14px;
+  text-overflow: ellipsis;
+  margin-left: 25px;
+  width: 80%;
+  word-wrap: break-word;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.liveIcon {
+  filter: invert(13%) sepia(89%) saturate(5755%) hue-rotate(358deg)
+    brightness(102%) contrast(113%);
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+}
+
+.dot {
+  height: 5px;
+  width: 5px;
+  background-color: #0352c9;
+  border-radius: 50%;
+}

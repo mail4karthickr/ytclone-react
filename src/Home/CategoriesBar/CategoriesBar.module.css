@@ -1,0 +1,21 @@
+.categoriesBar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  white-space: nowrap;
+  height: 100%;
+  overflow-x: scroll;
+  padding: 0px 20px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 60px;
+  background-color: #fff;
+  /* padding: 0px 20px; */
+}
+
+.categoriesBar::-webkit-scrollbar {
+  display: none;
+}

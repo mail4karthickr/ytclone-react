@@ -11,3 +11,13 @@
 .menuSubHeadColor {
   color: #555555;
 }
+
+.icon {
+  cursor: pointer;
+  filter: invert(33%) sepia(23%) saturate(0%) hue-rotate(141deg) brightness(93%)
+    contrast(92%);
+}
+
+.flex {
+  display: flex;
+}

@@ -1,0 +1,12 @@
+.sideDrawer {
+  background-color: aqua;
+  width: 100%;
+}
+
+.showFullTabBar {
+  width: 250px;
+}
+
+.hideFullTabBar {
+  width: 70px;
+}

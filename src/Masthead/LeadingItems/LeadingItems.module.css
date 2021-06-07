@@ -1,0 +1,16 @@
+.leadingItems {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 26px;
+}
+
+.link {
+  text-decoration: none;
+  color: #000;
+}
+
+.youtubeIcon {
+  width: 90px;
+  height: 28px;
+}

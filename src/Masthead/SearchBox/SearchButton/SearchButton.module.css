@@ -1,0 +1,28 @@
+@import url("../../../Shared/Styles/colors.module.css");
+
+.searchButton {
+  padding: 8px 20px;
+  cursor: pointer;
+  border: none;
+  color: lightgray;
+}
+
+.searchIcon {
+  width: 23px;
+  height: 23px;
+}
+
+@media (min-width: 0px) and (max-width: 500px) {
+  .searchButton {
+    padding: 10px;
+    background-color: white;
+    color: var(--accentColor);
+  }
+}
+
+@media (min-width: 501px) {
+  .searchButton:hover {
+    color: darkgray;
+    background-color: lightgray;
+  }
+}

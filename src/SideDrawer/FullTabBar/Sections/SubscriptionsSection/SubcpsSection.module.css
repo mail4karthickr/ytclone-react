@@ -1,0 +1,23 @@
+@import "../../../../Shared/Styles/colors.module.css";
+
+.subscriptions {
+  display: flex;
+  flex-direction: column;
+}
+
+.subscriptionItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 25px 10px 25px;
+  cursor: pointer;
+}
+
+.subscriptionItem:hover {
+  background-color: var(--hoverColor);
+}
+
+.showMore {
+  padding-left: 50px;
+  background-color: blue;
+}

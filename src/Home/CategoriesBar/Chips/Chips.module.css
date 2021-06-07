@@ -1,0 +1,20 @@
+@import "../../../Shared/Styles/colors.module.css";
+
+.chips {
+  padding: 7px 13px;
+  border-radius: 25px;
+  background-color: var(--controlsBgColor);
+  cursor: pointer;
+  color: #000;
+  border: 1px solid var(--borderColor);
+  font-size: 15px;
+}
+
+.chips:not(.selected):hover {
+  background-color: var(--controlsHoverColor);
+}
+
+.selected {
+  background-color: var(--catElementSelColor);
+  color: var(--primaryColor);
+}
