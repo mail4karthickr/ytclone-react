@@ -4,7 +4,6 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
 import Root from './Screens/Root/Root';
 import { store } from './store'
 import { ThemeProvider } from 'styled-components';

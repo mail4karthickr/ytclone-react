@@ -1,5 +1,4 @@
 import React from 'react';
-import classes from './MoreFromYoutube.module.css';
 import YouTubePremiumIcon from '../../../assets/youtubePremiumIcon.svg';
 import FashionAndBeautyIcon from '../../../assets/fashionAndBeautyIcon.svg';
 import GamingIcon from '../../../assets/gamingIcon.svg';

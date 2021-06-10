@@ -3,17 +3,17 @@ import * as ActionTypes from './ActionTypes';
 
 const initialState = {
     accessToken: null,
-    tokenExpiry: null,
     authError: null,
     fetchingUserInfo: false,
-    fecthedUserInfo: null,
+    userInfo: null,
     fetchUserInfoError: null
 }
 
 const authenticated = (state, action) => {
+    console.log("authenticated userinfo", action.userInfo);
     return updateObject(state, {
         accessToken: action.accessToken,
-        tokenExpiry: action.expiresIn
+        userInfo: action.userInfo
     });
 }
 
@@ -32,7 +32,7 @@ const fetchingUserInfo = (state, action) => {
 const fetchedUserInfo = (state, action) => {
     return updateObject(state, {
         fetchingUserInfo: false,
-        fecthedUserInfo: action.userInfo
+        userInfo: action.userInfo
     })
 }
 
@@ -57,7 +57,6 @@ const reducer = ( state = initialState, action ) => {
         case ActionTypes.LOGOUT: return  logOut(state, action);
         default: return state
     }
-    return state
 };
 
 export default reducer;

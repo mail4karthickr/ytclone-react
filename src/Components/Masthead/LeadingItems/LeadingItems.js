@@ -9,7 +9,7 @@ const LeadingItems = (props) => {
         <div className={classes.leadingItems}>
             <DrawerToggle onClick={props.toggleMenu} />
             <Link to="/" className={classes.link}>
-                <img src={youtubeIcon} className={classes.youtubeIcon}/>
+                <img src={youtubeIcon} className={classes.youtubeIcon} alt=""/>
             </Link>
         </div>
     );

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import FullTabBar from './FullTabBar/FullTabBar';
 import TabItems from './TabBar/TabItems';
-import classes from './SideDrawer.module.css';
 import { connect } from 'react-redux';
 import * as actions from './Redux/Actions';
 
@@ -34,6 +33,8 @@ class SideDrawer extends Component {
                 break;
             case SideDrawerMenuType.TabItems:
                 contents = <TabItems />
+                break;
+            default:
                 break;
         }
         return <div style={{width: this.props.width}}>{contents}</div>;

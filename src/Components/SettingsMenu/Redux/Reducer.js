@@ -63,7 +63,6 @@ const reducer = ( state = initialState, action ) => {
         case ActionTypes.UPDATE_REGION: return updateRegion(state, action);
         default: return state
     }
-    return state
 };
 
 export default reducer;

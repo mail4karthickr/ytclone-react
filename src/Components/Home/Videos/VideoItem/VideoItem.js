@@ -25,6 +25,7 @@ const VideoThumbnail = (props) => {
             <img
                 className={classes.thumbnailImage}
                 src={props.thumbnail}
+                alt=""
             />
             <div className={classes.duration}>{props.duration}</div>
         </div>

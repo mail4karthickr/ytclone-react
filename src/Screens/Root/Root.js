@@ -3,15 +3,17 @@ import { connect } from "react-redux";
 import classes from "./Root.module.css";
 import MediaQuery from '../../Shared/MediaQuery'
 import * as actions from './Redux/Actions';
-import Toolbar from "Components/Masthead/Masthead";
+import Masthead from "Components/Masthead/Masthead";
 import Home from "../../Components/Home/Home";
 import SideDrawer, { SideDrawerMenuType } from "Components/SideDrawer/SideDrawer";
 import OverlayTabBar from "Components/SideDrawer/OverlayTabBar/OverlayTabBar";
+import AuthSettingsMenu from '../../Components/SettingsMenu/AuthSettingsMenu';
 
 class Root extends Component {
   state = {
     sideDrawerMenuType: SideDrawerMenuType.none,
-    showOverlayTabBar: false
+    showOverlayTabBar: false,
+    showAuthSettingsMenu: false
   }
 
   sideDrawerClosedHandler = () => {
@@ -46,6 +48,14 @@ class Root extends Component {
     }
   }
 
+  showAuthSettingsMenuHandler = () => {
+    console.log('showAuthSettingsMenuHandler userInfo', this.props.userInfo);
+    this.setState({
+      ...this.state,
+      showAuthSettingsMenu: !this.state.showAuthSettingsMenu
+    })
+  }
+
   tabBarDismissed = () => {
     this.setState({
       ...this.state,
@@ -59,9 +69,6 @@ class Root extends Component {
   }
 
   componentDidMount() {
-
-    console.log("Root component did mount")
-    console.log("window.location.href", window.location.href);
     let searchParams = new URLSearchParams(window.location.href);
     const hasToken = searchParams.has('access_token')
     if (hasToken) {
@@ -109,9 +116,11 @@ class Root extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.accessToken !== this.props.accessToken) {
-      this.props.getUserInfo();
-    }
+    console.log('Root componentDidUpdate', this.props.userInfo);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log("componentWillReceiveProps nextProps", nextProps);
   }
 
   isXLScreen = () => {
@@ -126,7 +135,14 @@ class Root extends Component {
     return window.matchMedia("(min-width: 0px) and (max-width: 799px)").matches;
   }
 
+  // componentDidUpdate(prevProps, prevState, snapshot) {
+  //   if (prevProps.isAuthenticated !== this.props.isAuthenticated && this.props.isAuthenticated) {
+  //       this.props.fetchCategories();
+  //   }
+  // }
+
   render() {
+    console.log("this.props.userInfo", this.props.userInfo);
     let sideDrawerSize = "";
     let homeSize = "100vw"
     let mainAttachedClasses = [classes.main]
@@ -139,7 +155,6 @@ class Root extends Component {
       homeSize = "calc(100vw - 70px)"
       mainAttachedClasses = [classes.main, classes.tabItems]
     } else if (this.state.sideDrawerMenuType === SideDrawerMenuType.none) {
-      console.log("Inrender SideDrawerMenuType none")
       sideDrawerSize = '0px';
       homeSize = "calc(100vw - 0px)";
       mainAttachedClasses = [classes.main];
@@ -149,7 +164,13 @@ class Root extends Component {
       <div className={classes.wrapper}>
         {this.state.showOverlayTabBar ? <OverlayTabBar 
           closed={this.tabBarDismissed} isAuthenticated={this.props.isAuthenticated} /> : null}
-        <Toolbar className={classes.toolBar} toggleMenu={() => this.toggleMenuHandler()}/>
+        <Masthead
+          className={classes.toolBar}
+          userInfo={this.props.userInfo}
+          toggleMenu={() => this.toggleMenuHandler()}
+          showAuthSettingsMenu={() => this.showAuthSettingsMenuHandler()}
+        />
+        {this.state.showAuthSettingsMenu ? <AuthSettingsMenu userInfo={this.props.userInfo} /> : null }
         <section className={mainAttachedClasses.join(" ")}>
           <SideDrawer
             clicked={this.tabBarDismissed}
@@ -167,8 +188,7 @@ class Root extends Component {
 const mapStateToProps = state => {
   return {
       isAuthenticated: state.root.accessToken !== null,
-      accessToken: state.root.accessToken,
-      expiresIn: state.root.tokenExpiry,
+      userInfo: state.root.userInfo
   };
 }
 
@@ -176,7 +196,6 @@ const mapDispatchToProps = dispatch => {
   return {
       authenticationCompleted: (accessToken, expiresIn) => dispatch(actions.authenticationCompleted(accessToken, expiresIn)),
       authenticationError: (location) => dispatch(actions.authenticationError(location)),
-      getUserInfo: () => dispatch(actions.fetchUserInfo()),
       onTryAutoSignup: () => dispatch( actions.authCheckState() )
   }
 }

@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import MenuTitle from '../MenuTitle/MenuTitle';
 import classes from './List.module.css';
 import styles from '../../../Shared/Styles/styles.module.css';
-import { updateObject } from 'Shared/Utility';
 import ListItem from '../../../Shared/Components/UI/ListItem/ListItem';
 import tickIcon from '../assets/tickIcon.svg';
 

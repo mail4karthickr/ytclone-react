@@ -6,8 +6,6 @@ import { connect } from 'react-redux';
 import Spinner from './Spinner/SettingsMenuLoader';
 import classes from './SettingsMenu.module.css';
 import LanguageList from './List/LanguageList';
-import { updateObject } from 'Shared/Utility';
-import { themeType } from './DeviceTheme/DeviceTheme'
 import { MenuItemType } from './RootMenu/RootMenu';
 import LocationList from './List/LocationList';
 
@@ -70,6 +68,8 @@ class SettingsMenu extends Component {
                 break;
             case MenuItemType.RestrictedMode:
                 this.setState({...this.state, menu: MenuType.RestrcitedMode})
+                break;
+            default:
                 break;
         }
     }

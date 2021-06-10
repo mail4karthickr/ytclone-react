@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ShowMoreSubscpsIcon from '../../../assets/showMoreIcon.svg';
 import ShowFewerSubscpsIcon from '../../../assets/showFewerIcon.svg';
-import ListItem from 'Shared/Components/UI/ListItem/ListItem';
 import classes from './SubcpsSection.module.css';
 import TabItem from '../TabItem/TabItem';
 import SectionItem from '../SectionItem/SectionItem';

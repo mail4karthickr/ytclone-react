@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import classes from './Home.module.css';
 import * as actions from './Redux/Actions';
 import CategoriesBar from './CategoriesBar/CategoriesBar';
-import Divider from 'Shared/Components/UI/Divider/Divider';
 import Videos from './Videos/Videos';
 
 
@@ -19,10 +18,19 @@ class Home extends Component {
         }
     }
 
+    categoryChanged(id) {
+        console.log("Update category id", id);
+        this.props.fetchVideos("IN", id);
+    }
+
     render() {
         return(
             <div style={{maxWidth: this.props.width}} className={classes.home}> 
-                {this.props.categories.length > 0 ? <CategoriesBar className={classes.categoriesBar} categories={this.props.categories} /> : null } 
+                {this.props.categories.length > 0 ? <CategoriesBar 
+                    className={classes.categoriesBar} 
+                    categories={this.props.categories}
+                    categoryChanged={(categoryId) => this.categoryChanged(categoryId)}
+                /> : null } 
                 <Videos className={classes.videos} videos={this.props.videos} />
             </div>
         )

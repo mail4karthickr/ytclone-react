@@ -9,6 +9,7 @@ const SearchButton = () => {
             <img
                 src={SearchIcon}
                 className={`${styles.icon} ${classes.searchIcon}`}
+                alt=""
             />
         </button>
     );

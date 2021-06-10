@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import SignInButton from './SignInButton/SignInButton';
 import classes from './TrailingItems.module.css';
+import SignInButton from './SignInButton/SignInButton';
 import menuIcon from '../assets/menuIcon.svg';
 import { Tooltip } from '@material-ui/core';
 import YouTubeAppsMenu from './YouTubeAppsMenu/YouTubeAppsMenu';
@@ -9,9 +9,8 @@ import NotificationIcon from '../assets/notificationIcon.svg';
 import CreateVideoIcon from '../assets/createVideoIcon.svg';
 import YoutubeAppsIcon from '../assets/youtubeAppsIcon.svg';
 import EllipsisIcon from '../assets/ellipsisIcon.svg';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
-import styles from '../../../Shared/Styles/styles.module.css';
+import AuthSettingsMenu from '../../SettingsMenu/AuthSettingsMenu';
 
 const Avatar = styled.img`
     width: 30px;
@@ -30,23 +29,31 @@ const SettingsMenuIcon = styled.img`
 
 class TrailingItems extends Component {
     state = {
-        showMenu: false,
-        showSettingsMenu: false
+        showYoutubeAppsMenu: false,
+        showSettingsMenu: false,
+        showAuthSettingsMenu: false
     }
 
     youtubeAppsMenuHandler = () => {
         this.setState({
             ...this.state,
-            showMenu: !this.state.showMenu
+            showYoutubeAppsMenu: !this.state.showYoutubeAppsMenu
         });
       }
   
       settingsMenuHandler = () => {
-          this.setState({
-              ...this.state,
-              showSettingsMenu: !this.state.showSettingsMenu
-          });
-      }
+        this.setState({
+            ...this.state,
+            showSettingsMenu: !this.state.showSettingsMenu
+        });
+    }
+
+    showAuthSettingsMenuHandler = () => {
+        this.setState({
+            ...this.state,
+            showAuthSettingsMenu: !this.state.showAuthSettingsMenu
+        });
+    }
       
     render() {
         return this.props.userInfo !== null ? this.authenticatedTrailingItems() : this.unAuthTrailingItems()
@@ -55,10 +62,26 @@ class TrailingItems extends Component {
     authenticatedTrailingItems() {
         return (
             <div className={classes.trailingItems}>
-                <img src={CreateVideoIcon} className={classes.menuIcon}/>
-                <img src={YoutubeAppsIcon} className={classes.menuIcon}/>
-                <img src={NotificationIcon} className={classes.menuIcon}/>
-                <Avatar src={this.props.userInfo.picture} />
+                <img
+                    className={classes.menuIcon}
+                    src={CreateVideoIcon}  
+                    alt=""
+                />
+                <img 
+                    className={classes.menuIcon} 
+                    src={YoutubeAppsIcon}  
+                    alt=""
+                />
+                <img 
+                    className={classes.menuIcon} 
+                    src={NotificationIcon}  
+                    alt=""
+                />
+                {this.state.showAuthSettingsMenu ? <AuthSettingsMenu /> : null}
+                <Avatar 
+                    src={this.props.userInfo.picture}
+                    onClick={this.props.avatarClicked}
+                />
             </div>
         );
     }
@@ -67,12 +90,17 @@ class TrailingItems extends Component {
         return (
             <div className={classes.trailingItems}>
                 <Tooltip title="YouTube apps">
-                    <img src={menuIcon} className={classes.menuIcon} onClick={this.youtubeAppsMenuHandler}/>
+                    <img
+                        className={classes.menuIcon}
+                        src={menuIcon}
+                        alt=""
+                        onClick={this.youtubeAppsMenuHandler}
+                    />
                 </Tooltip>
                 <Tooltip title="Settings">
                     <SettingsMenuIcon src={EllipsisIcon} onClick={this.settingsMenuHandler}/>
                 </Tooltip>
-                {this.state.showMenu ? <YouTubeAppsMenu /> : null}
+                {this.state.showYoutubeAppsMenu ? <YouTubeAppsMenu /> : null}
                 {this.state.showSettingsMenu ? <SettingsMenu closeSettingsMenu={this.settingsMenuHandler} /> : null}
                 <SignInButton></SignInButton>
             </div>

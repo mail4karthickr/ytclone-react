@@ -105,8 +105,9 @@ class YoutubeApi {
                     console.log("Request failed", error.response);
                     throw error
                 });
-                break;
             case HttpMethod.Post:
+                break;
+            default: 
                 break;
         }
     }

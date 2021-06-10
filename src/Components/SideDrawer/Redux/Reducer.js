@@ -60,7 +60,6 @@ const reducer = ( state = initialState, action ) => {
         case ActionTypes.GET_PLAYLIST_ERROR: return getPlaylistError(state, action);
         default: return state
     }
-    return state
 };
 
 export default reducer;

@@ -1,6 +1,8 @@
 @import url("../../../../Shared/Styles/colors.module.css");
 
 .searchButton {
+  display: flex;
+  align-items: center;
   padding: 8px 20px;
   cursor: pointer;
   border: none;

@@ -75,11 +75,15 @@ class Masthead extends Component {
                     <img 
                         src={BackArrowIcon}
                         className={`${styles.icon} ${classes.backArrowIcon}`}
-                        onClick={this.backButtonClickedHandler} 
+                        onClick={this.backButtonClickedHandler}
+                        alt=""
                     />
                     <SearchBox />
                 </div>
                 break;
+            default:
+                break;
+         
         }
         return bar
     }
@@ -92,23 +96,19 @@ class Masthead extends Component {
                     <img 
                         src={MicrophoneIcon} 
                         className={`${styles.icon} ${classes.microphoneIcon}`}
+                        alt=""
                     />
                     <img 
                         src={SearchIcon} 
                         className={`${styles.icon} ${classes.searchIcon}`}
                         onClick={this.changeBarTypeHandler}
+                        alt=""
                     />
                 </div> : <SearchBox />}
-                <TrailingItems userInfo={this.props.userInfo} />
+                <TrailingItems userInfo={this.props.userInfo} avatarClicked={this.props.showAuthSettingsMenu} />
             </div>
         )
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        userInfo: state.root.fecthedUserInfo
-    };
-}
-
-export default connect(mapStateToProps, null)(Masthead);
+export default Masthead;

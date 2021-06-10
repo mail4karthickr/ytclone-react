@@ -1,4 +1,4 @@
-import { updateObject } from 'Shared/Utility';
+import { updateObject } from '../../../Shared/Utility';
 import * as ActionTypes from './ActionTypes';
 
 const initialState = {
@@ -62,7 +62,6 @@ const reducer = ( state = initialState, action ) => {
         case ActionTypes.FETCH_MOST_POPULAR_VIDEOS_ERROR: return fetchMostPopularVideosError(state, action);
         default: return state
     }
-    return state
 };
 
 export default reducer;

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import LiveIcon from '../../../assets/liveIcon.svg'
 import classes from './SectionItem.module.css';
 

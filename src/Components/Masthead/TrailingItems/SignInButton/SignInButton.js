@@ -1,8 +1,7 @@
+import React from 'react';
+import classes from './SignInButton.module.css';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
-import { Link } from 'react-router-dom';
-import classes from './SignInButton.module.css';
 
 const SignInButton = () => {
     var oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';

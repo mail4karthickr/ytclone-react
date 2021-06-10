@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import HomeIcon from '../../../assets/homeIcon.svg';
 import ExploreIcon from '../../../assets/exploreIcon.svg';
 import SubscriptionsIcon from '../../../assets/subscriptionsIcon.svg';

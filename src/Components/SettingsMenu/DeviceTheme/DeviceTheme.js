@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import ListItem from '../../../Shared/Components/UI/ListItem/ListItem';
 import classes from './DeviceTheme.module.css';
 import commonClasses from '../../../Shared/Styles/styles.module.css';

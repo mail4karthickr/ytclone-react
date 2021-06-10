@@ -1,5 +1,5 @@
 import SignInButton from 'Components/Masthead/TrailingItems/SignInButton/SignInButton';
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const Message = styled.p`

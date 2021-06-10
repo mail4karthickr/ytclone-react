@@ -32,6 +32,8 @@ const TabItem = (props) => {
         case TabItemType.History:
             icon = historyIcon;
             break;
+        default:
+            break;
     }
     let tabItemClasses = `${classes.tabItem}`;
     let tabIconClasses = `${classes.tabIcon}`;
@@ -41,7 +43,7 @@ const TabItem = (props) => {
     }
     return (
         <button className={tabItemClasses} onClick={() => props.onTabItemClicked(props.tag)}>
-            <img src={icon} className={tabIconClasses}/>
+            <img src={icon} className={tabIconClasses} alt="" />
             {props.title}
         </button>
     );

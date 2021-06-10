@@ -22,6 +22,14 @@ const fetchUserInfoError = (error) => {
     }
 }
 
+export const authSuccess = (accessToken, userInfo) => {
+    return {
+        type: ActionTypes.AUTHENTICATION_SUCCESS,
+        accessToken: accessToken,
+        userInfo: userInfo
+    }
+}
+
 export const logout = () => {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('expirationDate');
@@ -33,30 +41,37 @@ export const logout = () => {
 
 const authCheckState = () => {
     return dispatch => {
-        const token = localStorage.getItem('accessToken');
-        if (!token) {
+        const accessToken = localStorage.getItem('accessToken');
+        if (!accessToken) {
             dispatch(logout());
         } else {
-            const expirationDate = localStorage.getItem('accessToken');
+            const expirationDate = new Date(localStorage.getItem('expirationDate'));
             const userInfo = localStorage.getItem('userInfo');
-            const userInfoJson = JSON.parse(userInfo);
-            dispatch(authenticationCompleted(token, expirationDate));
-            dispatch(fetchedUserInfo(userInfoJson));
+            if (expirationDate <= new Date()) {
+                dispatch(logout());
+            } else {
+                dispatch(authSuccess(accessToken, JSON.parse(userInfo)));
+            }
         }
     }
 }
 
+
 const authenticationCompleted = (accessToken, tokenValidity) => {
     return dispatch => {
-        let expirationDate = new Date();
-        expirationDate.setSeconds(expirationDate.getSeconds() + tokenValidity);
-        localStorage.setItem('expirationDate', expirationDate.toString());
-        localStorage.setItem('accessToken', accessToken);
-        dispatch({ 
-            type: ActionTypes.AUTHENTICATION_SUCCESS,
-            accessToken: accessToken,
-            tokenExpiryDate: expirationDate
-        });
+        const expirationDate = new Date(new Date().getTime() + tokenValidity * 1000);
+        let api = new Api();
+        api.getUserInfo(accessToken)
+            .then((response) => {
+                localStorage.setItem('expirationDate', expirationDate.toString());
+                localStorage.setItem('accessToken', accessToken);
+                localStorage.setItem('userInfo', JSON.stringify(response));
+                dispatch(authSuccess(accessToken, response));
+            })
+            .catch((error) => {
+                dispatch(authenticationError(error));
+            }
+        );
     }
 }
 
@@ -69,24 +84,8 @@ const authenticationError = (error) => {
     }
 }
 
-const fetchUserInfo = () => {
-    return (dispatch, getState) => {
-        let api = new Api();
-        dispatch(fetchingUserInfo());
-        api.getUserInfo(getState().root.accessToken)
-        .then((response) => {
-            localStorage.setItem('userInfo', JSON.stringify(response));
-            dispatch(fetchedUserInfo(response));
-        })
-        .catch((error) => {
-            dispatch(fetchUserInfoError(error));
-        });
-    }
-}
-
 export {
     authenticationCompleted,
     authenticationError,
-    fetchUserInfo,
     authCheckState
 }

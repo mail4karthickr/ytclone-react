@@ -1,6 +1,5 @@
 import TabItem from '../TabItem/TabItem';
 import React from 'react'
-import styled from 'styled-components'
 import sportsIcon from '../../../assets/sportsIcon.svg';
 import gamingIcon from '../../../assets/gamingIcon.svg';
 import moviesIcon from '../../../assets/moviesIcon.svg';
@@ -38,47 +37,6 @@ const BestOfYoutube = () => {
     
     return (
         <div>{items}</div>
-    )
-}
-
-
-const ItemContainer = styled.div`
-    display: flex;
-    align-items: center;
-    padding: 0px 20px;
-    gap: 25px;
-    position: relative;
-`
-
-const ItemIcon = styled.img`
-    width: 25px;
-    height: 25px;
-    color: blue;
-    border-radius: 50%;
-`
-
-const Circle = styled.div`
-    width: 35px;
-    height: 35px;
-    background-color: cyan;
-    border-radius: 50%;
-`
-
-const IconContainer = styled.div`
-    background-color: blue;
-    position: relative;
-`
-
-const ItemName = styled.p`
-    font-size:15px;
-`
-
-const SectionItem = (props) => {
-    return (
-        <ItemContainer onClick={() => props.clicked(props.id)}>
-            <ItemIcon src={props.icon ?? props.url} />
-            <ItemName>{props.name}</ItemName>
-        </ItemContainer>
     )
 }
 

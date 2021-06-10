@@ -15,10 +15,7 @@ import browseChannelsIcon from '../assets/browseChannelsIcon.svg';
 import TabItem from './Sections/TabItem/TabItem';
 
 class FullTabBar extends Component {
-    constructor(props) {
-        super(props);
-    }
-    
+
     render() {
         return (
             this.props.isAuthenticated ? this.authMenu() : this.unauthMenu()
@@ -89,6 +86,10 @@ const Header = (props) => {
     return (
         <div className={classes.header}>
             <DrawerToggle onClick={props.closeMenu}  />
-            <img src={youtubeIcon} className={classes.youtubeIcon}/>
+            <img 
+                className={classes.youtubeIcon} 
+                src={youtubeIcon}
+                alt=""
+            />
         </div>)
 }
