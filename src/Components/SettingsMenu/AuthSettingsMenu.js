@@ -5,8 +5,10 @@ import youtubeStudioIcon from './assets/youtubeStudio.svg';
 import switchAccountIcon from './assets/switchAccount.svg';
 import signOutIcon from './assets/signOut.svg';
 import rightArrowIcon from './assets/rightArrowIcon.svg';
-import {  Menu, Row, Column, Avatar, Link, MenuItemRenderer, Divider, MenuSectionRenderer } from '../../Shared/Components/Utils';
+import {  Menu, Row, Column, Avatar, Link, MenuSectionRendererWithAllPadding, Divider, MenuSectionRenderer } from '../../Shared/Components/Utils';
 import ListItem from '../../Shared/Components/ListItem'
+import SettingsMenu from './SettingsMenu';
+import RootMenu from './RootMenu/RootMenu';
 
 function UserInfo({userInfo}) {
     return (
@@ -24,19 +26,20 @@ function UserInfo({userInfo}) {
 
 function AuthSettingsMenu({userInfo}) {
     return (
-        <Menu>
-            <MenuSectionRenderer>
+        <div>
+            <MenuSectionRendererWithAllPadding>
                 <UserInfo userInfo={userInfo}/>
-            </MenuSectionRenderer>
+            </MenuSectionRendererWithAllPadding>
             <Divider />
             <MenuSectionRenderer>
-                <ListItem leadingIcon={YourChannelIcon} title={"This is a title"} />
-                <ListItem leadingIcon={PurchaseAndMembershipsIcon} title={"This is a title"} />
-                <ListItem leadingIcon={youtubeStudioIcon} title={"This is a title"} />
-                <ListItem leadingIcon={switchAccountIcon} title={"This is a title"} trailingIcon={rightArrowIcon} />
-                <ListItem leadingIcon={signOutIcon} title={"This is a title"} />
+                <ListItem leadingIcon={YourChannelIcon} title={"Your channel"} />
+                <ListItem leadingIcon={PurchaseAndMembershipsIcon} title={"Purchases and memberships"} />
+                <ListItem leadingIcon={youtubeStudioIcon} title={"YouTube Studio"} />
+                <ListItem leadingIcon={switchAccountIcon} title={"Switch account"} trailingIcon={rightArrowIcon} />
+                <ListItem leadingIcon={signOutIcon} title={"Sign out"} />
             </MenuSectionRenderer>
-        </Menu>
+            <Divider />
+        </div>
     )
 }
 

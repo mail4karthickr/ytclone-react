@@ -105,10 +105,21 @@ class Masthead extends Component {
                         alt=""
                     />
                 </div> : <SearchBox />}
-                <TrailingItems userInfo={this.props.userInfo} avatarClicked={this.props.showAuthSettingsMenu} />
+                <TrailingItems
+                    isAuthenticated={this.props.isAuthenticated}
+                    userInfo={this.props.userInfo}
+                    avatarClicked={this.props.showAuthSettingsMenu}
+                />
             </div>
         )
     }
 }
 
-export default Masthead;
+const mapStateToProps = state => {
+    return {
+        isAuthenticated: state.root.isAuthenticated,
+        userInfo: state.root.userInfo
+    };
+  }
+
+export default connect(mapStateToProps, null)(Masthead);

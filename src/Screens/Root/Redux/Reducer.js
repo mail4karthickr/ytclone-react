@@ -2,6 +2,7 @@ import { updateObject } from 'Shared/Utility';
 import * as ActionTypes from './ActionTypes';
 
 const initialState = {
+    isAuthenticated: false,
     accessToken: null,
     authError: null,
     fetchingUserInfo: false,
@@ -12,6 +13,7 @@ const initialState = {
 const authenticated = (state, action) => {
     console.log("authenticated userinfo", action.userInfo);
     return updateObject(state, {
+        isAuthenticated: true,
         accessToken: action.accessToken,
         userInfo: action.userInfo
     });
@@ -19,6 +21,9 @@ const authenticated = (state, action) => {
 
 const authenticationError= (state, action) => {
     return updateObject(state, {
+        isAuthenticated: false,
+        accessToken: null,
+        userInfo: null,
         authError: action.error
     })
 }

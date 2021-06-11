@@ -27,11 +27,22 @@ const SettingsMenuIcon = styled.img`
     contrast(83%);
 `
 
+const MenuType = Object.freeze({
+    Auth: 'Auth',
+    UnAuth: 'UnAuth',
+    YoutubeAppsMenu: 'YoutubeAppsMenu',
+    None: 'None'
+});
+
+const TrailingItemsType = Object.freeze({
+    Auth: 'Auth',
+    UnAuth: 'UnAuth',
+})
+
 class TrailingItems extends Component {
     state = {
-        showYoutubeAppsMenu: false,
-        showSettingsMenu: false,
-        showAuthSettingsMenu: false
+        trailingItemsType: this.props.isAuthenticated ? TrailingItemsType.Auth : TrailingItemsType.UnAuth,
+        menuType: null,
     }
 
     youtubeAppsMenuHandler = () => {
@@ -54,9 +65,32 @@ class TrailingItems extends Component {
             showAuthSettingsMenu: !this.state.showAuthSettingsMenu
         });
     }
+
+    changeMenuTypeHandler = (menuType) => {
+        this.setState({
+            ...this.state,
+            menuType: this.state.menuType === menuType ? MenuType.None : menuType
+        })
+    }
+
+    componentDidUpdate(prevProps) {
+        if(this.props.isAuthenticated !== prevProps.isAuthenticated && this.props.isAuthenticated) {
+            this.setState({
+                ...this.state,
+                trailingItemsType: TrailingItemsType.Auth
+            })
+        }
+    } 
       
     render() {
-        return this.props.userInfo !== null ? this.authenticatedTrailingItems() : this.unAuthTrailingItems()
+        switch (this.state.trailingItemsType){
+            case TrailingItemsType.Auth:
+                return this.authenticatedTrailingItems();
+            case TrailingItemsType.UnAuth:
+                return this.unAuthTrailingItems();
+            default:
+                return null;
+        }
     }
 
     authenticatedTrailingItems() {
@@ -77,10 +111,10 @@ class TrailingItems extends Component {
                     src={NotificationIcon}  
                     alt=""
                 />
-                {this.state.showAuthSettingsMenu ? <AuthSettingsMenu /> : null}
+                {this.state.menuType === MenuType.Auth ? <SettingsMenu closeSettingsMenu={() => this.changeMenuTypeHandler(MenuType.None)} /> : null}
                 <Avatar 
                     src={this.props.userInfo.picture}
-                    onClick={this.props.avatarClicked}
+                    onClick={() => this.changeMenuTypeHandler(MenuType.Auth)}
                 />
             </div>
         );
@@ -94,14 +128,14 @@ class TrailingItems extends Component {
                         className={classes.menuIcon}
                         src={menuIcon}
                         alt=""
-                        onClick={this.youtubeAppsMenuHandler}
+                        onClick={() => this.changeMenuTypeHandler(MenuType.YoutubeAppsMenu)}
                     />
                 </Tooltip>
                 <Tooltip title="Settings">
-                    <SettingsMenuIcon src={EllipsisIcon} onClick={this.settingsMenuHandler}/>
+                    <SettingsMenuIcon src={EllipsisIcon} onClick={() => this.changeMenuTypeHandler(MenuType.UnAuth)}/>
                 </Tooltip>
-                {this.state.showYoutubeAppsMenu ? <YouTubeAppsMenu /> : null}
-                {this.state.showSettingsMenu ? <SettingsMenu closeSettingsMenu={this.settingsMenuHandler} /> : null}
+                {this.state.menuType === MenuType.YoutubeAppsMenu ? <YouTubeAppsMenu /> : null}
+                {this.state.menuType === MenuType.UnAuth ? <SettingsMenu closeSettingsMenu={() => this.changeMenuTypeHandler(MenuType.None)} /> : null}
                 <SignInButton></SignInButton>
             </div>
         );

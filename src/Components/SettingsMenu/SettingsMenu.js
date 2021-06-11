@@ -8,9 +8,11 @@ import classes from './SettingsMenu.module.css';
 import LanguageList from './List/LanguageList';
 import { MenuItemType } from './RootMenu/RootMenu';
 import LocationList from './List/LocationList';
+import AuthSettingsMenu from './AuthSettingsMenu';
 
 const MenuType = Object.freeze({
-    RootMenu: 'RootMenu',
+    Auth: 'Auth',
+    UnAuth: 'UnAuth',
     DeviceTheme: 'DeviceTheme',
     Language: 'Language',
     Location: 'Location',
@@ -19,7 +21,7 @@ const MenuType = Object.freeze({
 
 class SettingsMenu extends Component {
     state = {
-        menu: MenuType.RootMenu,
+        menu: [this.props.isAuthenticated ? MenuType.Auth : MenuType.UnAuth]
     }
 
     componentDidMount() {
@@ -27,10 +29,7 @@ class SettingsMenu extends Component {
     }
 
     onDeviceThemeBackClickedHandler = () => {
-        this.setState({
-            ...this.state,
-            menu: MenuType.RootMenu
-        })
+        this.removeLastItem();
     }
 
     themeUpdatedHandler = (selectedTheme) => {
@@ -40,7 +39,7 @@ class SettingsMenu extends Component {
 
     languageListBackClickedHandler = () => {
         console.log("languageListBackClickedHandler");
-        this.setState({menu: MenuType.RootMenu});
+        // this.setState({menu: MenuType.RootMenu});
     }
 
     languageChangedHandler = (language) => {
@@ -55,19 +54,34 @@ class SettingsMenu extends Component {
         this.props.closeSettingsMenu();
     }
 
+    removeLastItem = () => {
+        this.setState({
+            ...this.state,
+            menu: this.state.menu.slice(0, this.state.menu.length - 1)
+        })
+    }
+
+    showSelectThemeMenu = () => {
+        console.log('showSelectThemeMenu');
+        this.setState({
+            ...this.state,
+            menu: this.state.menu.concat(MenuType.DeviceTheme)
+        })
+    }
+
     rootMenuListItemTappedHandler = (itemType) => {
         switch (itemType) {
             case MenuItemType.DeviceTheme:
-                this.setState({...this.state, menu: MenuType.DeviceTheme})
+                this.setState({...this.state, menu: this.state.menu.concat(MenuType.DeviceTheme)})
                 break;
             case MenuItemType.Language:
-                this.setState({...this.state, menu: MenuType.Language})
+                this.setState({...this.state, menu: this.state.menu.concat(MenuType.Language)})
                 break;
             case MenuItemType.Location:
-                this.setState({...this.state, menu: MenuType.Location})
+                this.setState({...this.state, menu: this.state.menu.concat(MenuType.Location)})
                 break;
             case MenuItemType.RestrictedMode:
-                this.setState({...this.state, menu: MenuType.RestrcitedMode})
+                this.setState({...this.state, menu: this.state.menu.concat(MenuType.RestrcitedMode)})
                 break;
             default:
                 break;
@@ -75,15 +89,29 @@ class SettingsMenu extends Component {
     }
 
     render() {
-        console.log('this.props.currentLanguage', this.props.currentLanguage);
         if (this.props.fetchLanguagesAndRegionsStart) {
             return <div className={classes.menu}>
                 <Spinner />
             </div>
         }
         let menu = null;
-        switch (this.state.menu) {
-            case MenuType.RootMenu:
+        const menuType = this.state.menu.slice(-1)[0]
+        if (menuType === undefined) {
+            return menu;
+        }
+        switch (menuType) {
+            case MenuType.Auth:
+                menu = <div>
+                    <AuthSettingsMenu userInfo={this.props.userInfo} />
+                    <RootMenu
+                        currentLanguage={this.props.currentLanguage}
+                        currentLocation={this.props.currentRegion}
+                        currentTheme={this.props.currentTheme}
+                        onClick={(id) => this.rootMenuListItemTappedHandler(id)}
+                    />
+                </div>
+                break;
+            case MenuType.UnAuth:
                 menu = <RootMenu
                             currentLanguage={this.props.currentLanguage}
                             currentLocation={this.props.currentRegion}
@@ -93,7 +121,7 @@ class SettingsMenu extends Component {
                 break;
             case MenuType.DeviceTheme:
                 menu = <DeviceTheme 
-                            onDeviceThemeBackClicked={this.onDeviceThemeBackClickedHandler}
+                            onDeviceThemeBackClicked={this.removeLastItem}
                             themeChanged={ (selectedTheme) => this.themeUpdatedHandler(selectedTheme)}
                             currentTheme={this.props.currentTheme}
                         />
@@ -101,7 +129,7 @@ class SettingsMenu extends Component {
             case MenuType.Language:
                 menu = <LanguageList 
                             languages={this.props.fetchedLanguages}
-                            languageListBackClicked={this.languageListBackClickedHandler}
+                            languageListBackClicked={this.removeLastItem}
                             currentLanguage={this.props.currentLanguage}
                             languageChanged={(lang) => this.languageChangedHandler(lang)}
                         />
@@ -109,7 +137,7 @@ class SettingsMenu extends Component {
                 case MenuType.Location:
                     menu = <LocationList 
                                 locations={this.props.fetchedRegions}
-                                locationListBackClicked={this.languageListBackClickedHandler}
+                                locationListBackClicked={this.removeLastItem}
                                 currentLocation={this.props.currentRegion}
                                 locationChanged={(location) => this.locationChangedHandler(location)}
                             />
@@ -131,6 +159,8 @@ const mapStateToProps = state => {
         currentLanguage: state.settingsMenu.currentLanguage,
         currentRegion: state.settingsMenu.currentRegion,
         currentTheme: state.settingsMenu.currentTheme,
+        isAuthenticated: state.root.isAuthenticated,
+        userInfo: state.root.userInfo
     };
 }
 

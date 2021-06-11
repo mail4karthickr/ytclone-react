@@ -23,15 +23,18 @@ export const Avatar = styled.img`
 export const Menu = styled.div`
     position: absolute;
     z-index: 200;
-    right: 15px;
+    right: 25px;
     top: 50px;
-    width: 280px;
+    width: 300px;
     border: 1px solid ${props => props.theme.borderColor};
     border-top: none;
     background-color: #fff;
 `
 export const MenuSectionRenderer = styled.div`
     padding: 10px 0px;
+`
+export const MenuSectionRendererWithAllPadding = styled.div`
+    padding: 15px;
 `
 export const MenuItemRenderer = styled(Row)`
     padding: 10px 15px;
@@ -42,6 +45,7 @@ export const MenuItemRenderer = styled(Row)`
     }
 `
 export const MenuTitle = styled.span`
+    font-size: 0.9rem;
     flex: 1;
 `
 export const Divider = styled.div`
