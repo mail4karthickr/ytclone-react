@@ -1,16 +1,15 @@
 import React from 'react';
-import classes from './RootMenu.module.css';
-import commonClasses from '../../../Shared/Styles/styles.module.css';
-import deviceThemeIcon from '../assets/deviceThemeIcon.svg';
-import helpIcon from '../assets/helpIcon.svg';
-import keyboardShortCutsIcon from '../assets/keyboardShortCutsIcon.svg';
-import languageIcon from '../assets/languageIcon.svg';
-import locationIcon from '../assets/locationIcon.svg';
-import sendFeedbackIcon from '../assets/sendFeedbackIcon.svg';
-import settingsIcon from '../assets/settingsIcon.svg';
-import yourDataIcon from '../assets/yourDataIcon.svg';
-import rightArrowIcon from '../assets/rightArrowIcon.svg';
-import ListItem from '../../../Shared/Components/UI/ListItem/ListItem';
+import { MenuSectionRenderer }  from '../../Shared/Components/Utils';
+import deviceThemeIcon from './assets/deviceThemeIcon.svg';
+import helpIcon from './assets/helpIcon.svg';
+import keyboardShortCutsIcon from './assets/keyboardShortCutsIcon.svg';
+import languageIcon from './assets/languageIcon.svg';
+import locationIcon from './assets/locationIcon.svg';
+import sendFeedbackIcon from './assets/sendFeedbackIcon.svg';
+import settingsIcon from './assets/settingsIcon.svg';
+import yourDataIcon from './assets/yourDataIcon.svg';
+import rightArrowIcon from './assets/rightArrowIcon.svg';
+import ListItem from '../../Shared/Components/ListItem';
 
 export const MenuItemType = Object.freeze({
     DeviceTheme: 'DeviceTheme',
@@ -24,12 +23,27 @@ export const MenuItemType = Object.freeze({
     RestrictedMode: 'RestrictedMode'
 })
 
-const RootMenu = (props) => {
+function RestictedMode({isRestrictedModeOn, onClick}) {
+    return (
+        <MenuSectionRenderer>
+            <ListItem
+                id={"Restricted Mode"}
+                key={"RestrictedMode"}
+                title= {isRestrictedModeOn ? "RestrictedMode: On" : "RestrictedMode: Off"}
+                onClick={() => onClick()}
+                trailingIcon={rightArrowIcon}
+            />
+        </MenuSectionRenderer>
+    )
+}
+
+
+const GeneralSettings = (props) => {
     const menuItems = [
         {
             name: MenuItemType.DeviceTheme,
             leadingIcon: deviceThemeIcon, 
-            title: <div className={classes.title}>{`Appearance: ${props.currentTheme}`}</div>, 
+            title: <div>{`Appearance: ${props.currentTheme}`}</div>, 
             trailingIcon: rightArrowIcon,
             onClick: props.showDeviceTheme
         },
@@ -71,35 +85,27 @@ const RootMenu = (props) => {
             name: MenuItemType.KeyboardShortcuts,
             leadingIcon: keyboardShortCutsIcon, 
             title: <div>Keyboard shortcuts</div>
-        },
-        {
-            name: MenuItemType.RestrictedMode,
-            title: <div>Restricted Mode: Off</div>,
-            trailingIcon: rightArrowIcon,
-            onClick: props.showRestrictedMode
         }
     ]
 
     let listItems = menuItems.map((item) => {
-        let divider = null;
-        if (item.name === MenuItemType.KeyboardShortcuts) {
-            divider = <div key="divider" className={`${commonClasses.divider} ${classes.divder}`}></div>
-        }
         return (
-            <div>
+            <>
                 <ListItem
                     id={item.name}
                     key={item.name}
-                    leadingIcon={item.leadingIcon}
+                    leadingIcon={item.leadingIcon} 
+                    title={item.title} 
                     trailingIcon={item.trailingIcon}
-                    title={item.title}
                     onClick={ (id) => props.onClick(id) }
                 />
-                {divider}
-            </div>
+            </>
         )
     });
-    return <ul className={classes.menu}>{listItems}</ul>
+    return <>
+        <MenuSectionRenderer>{listItems}</MenuSectionRenderer>
+        <RestictedMode isRestrictedModeOn={false} onClick={() => { console.log("onclick"); }} />
+    </>
 };
 
-export default RootMenu;
+export default GeneralSettings;

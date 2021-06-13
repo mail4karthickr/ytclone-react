@@ -20,24 +20,28 @@ export const Avatar = styled.img`
     height: 30px;
     border-radius: 50%;
 `
-export const Menu = styled.div`
+export const MenuRenderer = styled.div`
     position: absolute;
     z-index: 200;
-    right: 25px;
-    top: 50px;
+    padding: 8px 0px 0px 0px;
+    top: 20px;
+    right: 0px;
     width: 300px;
     border: 1px solid ${props => props.theme.borderColor};
     border-top: none;
-    background-color: #fff;
+    border-bottom: none;
+    background-color: #ffff;
 `
 export const MenuSectionRenderer = styled.div`
     padding: 10px 0px;
+    border-bottom: 1px solid ${props => props.theme.borderColor};
 `
-export const MenuSectionRendererWithAllPadding = styled.div`
+export const MenuSectionRendererWithPadding = styled.div`
     padding: 15px;
+    border-bottom: 1px solid ${props => props.theme.borderColor};
 `
 export const MenuItemRenderer = styled(Row)`
-    padding: 10px 15px;
+    padding: 7px 15px;
     cursor: pointer;
     gap: 20px;
     &:hover {
@@ -55,7 +59,7 @@ export const Divider = styled.div`
     margin: 0px;
 `
 export const DividerWithMargin = styled(Divider)`
-    margin: 20px 0px;
+    margin: 8px 0px;
 `
 export const Icon = styled.img`
     width: 24px;

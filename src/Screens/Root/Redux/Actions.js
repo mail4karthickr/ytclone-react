@@ -30,7 +30,7 @@ export const authSuccess = (accessToken, userInfo) => {
     }
 }
 
-export const logout = () => {
+const logout = () => {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('expirationDate');
     localStorage.removeItem('userInfo');
@@ -87,5 +87,6 @@ const authenticationError = (error) => {
 export {
     authenticationCompleted,
     authenticationError,
-    authCheckState
+    authCheckState,
+    logout
 }

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import { logout } from '../../Screens/Root/Redux/Actions';
 import classes from './Masthead.module.css';
 import SearchBox from './SearchBox/SearchBox';
 import TrailingItems from './TrailingItems/TrailingItems';
@@ -60,7 +61,7 @@ class Masthead extends Component {
             })
         })
     }
-
+    
     render() {
         let bar = null;
         switch (this.state.barType) {
@@ -120,6 +121,6 @@ const mapStateToProps = state => {
         isAuthenticated: state.root.isAuthenticated,
         userInfo: state.root.userInfo
     };
-  }
+}
 
 export default connect(mapStateToProps, null)(Masthead);

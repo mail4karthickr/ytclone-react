@@ -7,7 +7,7 @@ import Masthead from "Components/Masthead/Masthead";
 import Home from "../../Components/Home/Home";
 import SideDrawer, { SideDrawerMenuType } from "Components/SideDrawer/SideDrawer";
 import OverlayTabBar from "Components/SideDrawer/OverlayTabBar/OverlayTabBar";
-import AuthSettingsMenu from '../../Components/SettingsMenu/AuthSettingsMenu';
+import AuthSettingsMenu from '../../Components/SettingsMenu/UserSettings';
 
 class Root extends Component {
   state = {
@@ -196,7 +196,7 @@ const mapDispatchToProps = dispatch => {
   return {
       authenticationCompleted: (accessToken, expiresIn) => dispatch(actions.authenticationCompleted(accessToken, expiresIn)),
       authenticationError: (location) => dispatch(actions.authenticationError(location)),
-      onTryAutoSignup: () => dispatch( actions.authCheckState() )
+      onTryAutoSignup: () => dispatch( actions.authCheckState() ),
   }
 }
 
