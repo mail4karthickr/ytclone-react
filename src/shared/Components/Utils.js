@@ -24,7 +24,7 @@ export const MenuRenderer = styled.div`
     position: absolute;
     z-index: 200;
     padding: 8px 0px 0px 0px;
-    top: 20px;
+    top: 35px;
     right: 0px;
     width: 300px;
     border: 1px solid ${props => props.theme.borderColor};
@@ -65,4 +65,11 @@ export const Icon = styled.img`
     width: 24px;
     height: 24px;
     filter: invert(61%) sepia(0%) saturate(7009%) hue-rotate(83deg) brightness(85%) contrast(93%);
+`
+export const TrailingIcon = styled(Icon)`
+    display: ${(props) => props.src === null ? 'none' : 'block'}
+`
+export const IconImage = styled.img`
+    width: 24px;
+    height: 24px;
 `

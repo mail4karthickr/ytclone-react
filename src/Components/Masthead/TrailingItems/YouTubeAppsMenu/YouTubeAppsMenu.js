@@ -1,42 +1,77 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import classes from './YouTubeApps.module.css';
+import styled from 'styled-components';
+import { MenuRenderer, MenuSectionRenderer } from '../../../../Shared/Components/Utils';
 import tvIcon from '../../assets/youTubeTv.svg';
 import musicIcon from '../../assets/youTubeMusic.svg';
 import kidsIcon from '../../assets/youTubeKids.svg';
 import creatorAcademyIcon from '../../assets/youTubeCreatorAcademy.svg';
 import artistsIcon from '../../assets/youTubeArtist.svg';
+import ListItemLink from '../../../../Shared/Components/ListItemLink';
 
-const YouTubeAppsType = Object.freeze({
-    Tv: {link: "", title:"YouTube TV", icon: tvIcon},
-    Music: {link: "", title:"YouTube Music", icon: musicIcon},
-    Kids: {link: "", title:"YouTube Kids", icon: kidsIcon},
-    Academy: {link: "", title:"Creator Academy", icon: creatorAcademyIcon},
-    Artists: {link: "", title:"YouTube for Artists", icon: artistsIcon}
+const YoutubeAppsMenuRenderer = styled(MenuRenderer)`
+    top: 45px;
+    right: 175px;
+    width: 215px;
+    padding: 0px;
+`
+
+const YoutubeMenuItemType = Object.freeze({
+    YoutubeTv: 'YouTube TV',
+    YoutubeMusic: 'YouTube Music',
+    YoutubeKids: 'YouTube kids',
+    CreatorAcademy: 'Creator Academy',
+    YoutubeForArtists: 'YouTube for Artists'
 });
 
+const menuItems = Object.freeze([
+    [
+        {
+            type: YoutubeMenuItemType.YoutubeTv,
+            icon: tvIcon,
+            url: 'https://tv.youtube.com/welcome/?utm_servlet=prod&utm_source=youtube_web&utm_medium=ep&utm_campaign=home&ve=34273'
+        }
+    ],
+    [
+        {
+            type: YoutubeMenuItemType.YoutubeMusic,
+            icon: musicIcon,
+            url: 'https://music.youtube.com/'
+        },
+        {
+            type: YoutubeMenuItemType.YoutubeKids,
+            icon: kidsIcon,
+            url: 'https://www.youtubekids.com/?source=youtube_web'
+        }
+    ],
+    [
+        {
+            type: YoutubeMenuItemType.CreatorAcademy,
+            icon: creatorAcademyIcon,
+            url: 'https://creatoracademy.youtube.com/page/home?utm_source=YouTube&utm_medium=YT%20Main&utm_campaign=YT%20Appsn'
+        },
+        {
+            type: YoutubeMenuItemType.YoutubeForArtists,
+            icon: artistsIcon,
+            url: 'https://artists.youtube.com/'
+        }
+    ]
+]);
 
-const MenuItemLink = (props) => {
-    return (
-        <Link to={props.appType.link} className={classes.link}>
-            <img src={props.appType.icon} alt="" className={classes.icon}/>
-            <div className={classes.title}>{props.appType.title}</div>
-        </Link>
-    );
-};
-
-const YouTubeAppsMenu = (props) => {
-    return (
-        <ul className={classes.menu}>
-            <li><MenuItemLink appType={YouTubeAppsType.Tv}/></li>
-            <div className={classes.divider}></div>
-            <li><MenuItemLink appType={YouTubeAppsType.Music}/></li>
-            <li><MenuItemLink appType={YouTubeAppsType.Kids}/></li>
-            <div className={classes.divider}></div>
-            <li><MenuItemLink appType={YouTubeAppsType.Academy}/></li>
-            <li><MenuItemLink appType={YouTubeAppsType.Artists}/></li>
-        </ul>
-    );
-};
+const YouTubeAppsMenu = () => {
+    const sections =  menuItems.map((menuItem) => {
+        return <MenuSectionRenderer> {
+                 menuItem.map((item) => {
+                    return <ListItemLink
+                         key={item.type}
+                         title={item.type}
+                         url={item.url}
+                         leadingIconImage={item.icon}                     
+                     />
+                }
+            )}
+            </MenuSectionRenderer>
+    })
+    return <YoutubeAppsMenuRenderer>{sections}</YoutubeAppsMenuRenderer>
+}
 
 export default YouTubeAppsMenu;

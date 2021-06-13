@@ -8,7 +8,7 @@ import rightArrowIcon from './assets/rightArrowIcon.svg';
 import { Row, Column, Avatar, Link, MenuSectionRendererWithPadding, MenuSectionRenderer } from '../../Shared/Components/Utils';
 import ListItem from '../../Shared/Components/ListItem';
 
-const MenuItemType = Object.freeze({
+export const UserSettingsMenuItemType = Object.freeze({
     YourChannel: 'Your channel',
     PurchasesAndMemberShips: 'Purchases and memberships',
     YoutubeStudio: 'YouTube Studio',
@@ -18,24 +18,24 @@ const MenuItemType = Object.freeze({
 
 export const menuItems = Object.freeze([
     {
-        type: MenuItemType.YourChannel,
+        type: UserSettingsMenuItemType.YourChannel,
         leadingIcon: YourChannelIcon,
     },
     {
-        type: MenuItemType.PurchasesAndMemberShips,
+        type: UserSettingsMenuItemType.PurchasesAndMemberShips,
         leadingIcon: PurchaseAndMembershipsIcon,
     },
     {
-        type: MenuItemType.YoutubeStudio,
+        type: UserSettingsMenuItemType.YoutubeStudio,
         leadingIcon: youtubeStudioIcon
     },
     {
-        type: MenuItemType.SwitchAccount,
+        type: UserSettingsMenuItemType.SwitchAccount,
         leadingIcon: switchAccountIcon,
         trailingIcon: rightArrowIcon
     },
     {
-        type: MenuItemType.SignOut,
+        type: UserSettingsMenuItemType.SignOut,
         leadingIcon: signOutIcon
     }
 ]);

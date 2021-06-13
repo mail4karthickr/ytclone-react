@@ -11,12 +11,11 @@ import { MenuItemType } from './GeneralSettings';
 import LocationList from './List/LocationList';
 import UserSettings from './UserSettings';
 import  { MenuRenderer } from '../../Shared/Components/Utils';
+import { UserSettingsMenuItemType } from './UserSettings';
 
 const AuthMenuRenderer = styled(MenuRenderer)`
-    top: 35px;
 `
 const UnAuthMenuRenderer = styled(MenuRenderer)`
-    top: 35px;
     right: 130px;
 `
 const MenuType = Object.freeze({
@@ -80,7 +79,13 @@ class Menu extends Component {
     }
 
     userSettingsMenuItemHandler = (itemType) => {
-        console.log("userSettingsMenuItemHandler", itemType);
+        switch(itemType) {
+            case UserSettingsMenuItemType.SignOut:
+                this.logoutHandler();
+                break;
+            default:
+                break;
+        }
     }
 
     // Component Lifecycle
